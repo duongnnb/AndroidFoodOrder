@@ -50,11 +50,12 @@ public class SignIn extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        //Check if user not exist in database
+                        //Check if user not exist in databases
                         if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
                             //Get user information
                             mDialog.dismiss();
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                            user.setPhone(edtPhone.getText().toString());
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
                                 //Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
                                 Intent homeintent = new Intent(SignIn.this,Home.class);
@@ -66,7 +67,7 @@ public class SignIn extends AppCompatActivity {
                             }
                         } else {
                             mDialog.dismiss();
-                            Toast.makeText(SignIn.this, "User not exist in database", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this, "User not exist in databases", Toast.LENGTH_SHORT).show();
                         }
                     }
 
